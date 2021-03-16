@@ -1,6 +1,7 @@
 package net.omni.omniportal;
 
 import net.omni.omniportal.command.OmniPortalCommand;
+import net.omni.omniportal.handler.ItemHandler;
 import net.omni.omniportal.handler.PlayerHandler;
 import net.omni.omniportal.handler.TimerHandler;
 import net.omni.omniportal.handler.TopHandler;
@@ -20,7 +21,6 @@ public class OmniPortalPlugin extends JavaPlugin {
 
     /*
     TODO:
-     * worldedit schematic
      * if performance is ded = make a runnable run everytime a player starts
      */
 
@@ -29,6 +29,7 @@ public class OmniPortalPlugin extends JavaPlugin {
     private SchematicHandler schematicHandler;
     private LavaPoolHandler lavaPoolHandler;
     private PlayerHandler playerHandler;
+    private ItemHandler itemHandler;
 
     @Override
     public void onEnable() {
@@ -43,6 +44,7 @@ public class OmniPortalPlugin extends JavaPlugin {
         this.playerHandler = new PlayerHandler(this);
         this.timerHandler = new TimerHandler(this);
         this.topHandler = new TopHandler(this);
+        this.itemHandler = new ItemHandler();
 
         // [+] LISTENERS [+]
         new PlayerListener(this).register();
@@ -120,5 +122,9 @@ public class OmniPortalPlugin extends JavaPlugin {
 
     public PlayerHandler getPlayerHandler() {
         return playerHandler;
+    }
+
+    public ItemHandler getItemHandler() {
+        return itemHandler;
     }
 }

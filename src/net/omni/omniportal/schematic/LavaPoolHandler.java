@@ -3,12 +3,10 @@ package net.omni.omniportal.schematic;
 import net.omni.omniportal.OmniPortalPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
@@ -95,7 +93,7 @@ public class LavaPoolHandler {
                             ChatColor.GOLD + String.valueOf(count--), 10, 10, 10);
                 else {
                     plugin.getTimerHandler().startTimer(player.getName());
-                    player.getInventory().addItem(new ItemStack(Material.FLINT_AND_STEEL));
+                    plugin.getItemHandler().givePortalItems(player);
                     cancel();
                 }
             }
@@ -112,7 +110,7 @@ public class LavaPoolHandler {
             return;
         }
 
-        player.getInventory().clear();
+        plugin.getItemHandler().clear(player);
 
         lavaPool.occupy(false);
 
@@ -144,8 +142,6 @@ public class LavaPoolHandler {
             int x = randomLocation.getBlockX();
             int y = randomLocation.getBlockY();
             int z = randomLocation.getBlockZ();
-
-            plugin.sendConsole("Origin: &cX: " + x + " Y: " + y + " Z: " + z);
 
             return plugin.getSchematicHandler().pasteSchem(x, y, z);
         }
