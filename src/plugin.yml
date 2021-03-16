@@ -1,0 +1,16 @@
+name: OmniPortal
+main: net.omni.omniportal.OmniPortalPlugin
+author: omni
+version: '1.0'
+softdepend:
+  - PlaceholderAPI
+depend:
+  - WorldEdit
+api-version: '1.16'
+
+commands:
+  omniportal:
+    usage: /<command>
+    aliases:
+      - portal
+      - omnip
