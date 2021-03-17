@@ -54,7 +54,8 @@ public class SchematicHandler {
         try (ClipboardReader reader = format.getReader(new FileInputStream(schematicFile))) {
             Clipboard clipboard = reader.read();
 
-            try (EditSession editSession = WorldEdit.getInstance().newEditSession(adaptedWorld)) {
+            try (EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().
+                    getEditSession(adaptedWorld, -1)) {
                 Operation operation = new ClipboardHolder(clipboard).createPaste(editSession)
                         .to(BlockVector3.at(x, y, z)).ignoreAirBlocks(false).build();
 

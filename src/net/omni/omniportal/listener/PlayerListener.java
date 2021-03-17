@@ -2,10 +2,9 @@ package net.omni.omniportal.listener;
 
 import net.omni.omniportal.OmniPortalPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -66,6 +65,9 @@ public class PlayerListener implements Listener {
         if (!plugin.getTimerHandler().hasTimer(player.getName()))
             return;
 
+        if (player.getGameMode() == GameMode.CREATIVE)
+            return;
+
         event.setCancelled(true);
         plugin.sendMessage(player, "&cYou cannot break blocks here.");
     }
@@ -76,7 +78,6 @@ public class PlayerListener implements Listener {
             return;
 
         ItemStack item = event.getItem();
-        Block block = event.getClickedBlock();
 
         if (item == null)
             return;
@@ -93,21 +94,13 @@ public class PlayerListener implements Listener {
             event.setCancelled(true);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "portal reset " + player.getName());
         } else if (item.getType() != Material.LAVA_BUCKET && item.getType() != Material.WATER_BUCKET
-                && item.getType() != Material.FLINT_AND_STEEL) {
-            event.setCancelled(true);
-            plugin.sendMessage(player, "&cYou cannot place blocks here.");
-        } else {
-            if (block == null)
+                && item.getType() != Material.FLINT_AND_STEEL && item.getType() != Material.BUCKET) {
+
+            if (player.getGameMode() == GameMode.CREATIVE)
                 return;
 
-            if (item.getType() == Material.WATER_BUCKET)
-                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,
-                        () -> {
-                            Block aboveBlock = block.getRelative(BlockFace.UP);
-
-                            if (aboveBlock.getType() == Material.WATER)
-                                aboveBlock.setType(Material.AIR);
-                        }, 10L);
+            event.setCancelled(true);
+            plugin.sendMessage(player, "&cYou cannot place blocks here.");
         }
     }
 
