@@ -44,7 +44,7 @@ public class OmniPortalPlugin extends JavaPlugin {
         this.playerHandler = new PlayerHandler(this);
         this.timerHandler = new TimerHandler(this);
         this.topHandler = new TopHandler(this);
-        this.itemHandler = new ItemHandler();
+        this.itemHandler = new ItemHandler(this);
 
         // [+] LISTENERS [+]
         new PlayerListener(this).register();

@@ -251,7 +251,8 @@ public class OmniPortalCommand implements CommandExecutor {
 
                 plugin.getTimerHandler().stopTimer(target.getName());
                 plugin.sendMessage(sender, "&aSuccessfully stopped timer for " + target.getName());
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "portal leave " + target.getName());
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                        "portal leave " + target.getName());
             } else if (args[0].equalsIgnoreCase("timer")) {
                 if (!sender.hasPermission("omniportal.timer.other"))
                     return noPerms(sender);

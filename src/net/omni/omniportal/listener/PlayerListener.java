@@ -72,13 +72,13 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getAction() != Action.RIGHT_CLICK_BLOCK)
+        if (event.getAction() != Action.RIGHT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_AIR)
             return;
 
         ItemStack item = event.getItem();
         Block block = event.getClickedBlock();
 
-        if (item == null || block == null)
+        if (item == null)
             return;
 
         Player player = event.getPlayer();
@@ -89,11 +89,17 @@ public class PlayerListener implements Listener {
         if (!plugin.getTimerHandler().hasTimer(player.getName()))
             return;
 
-        if (item.getType() != Material.LAVA_BUCKET && item.getType() != Material.WATER_BUCKET
+        if (plugin.getItemHandler().isButton(item)) {
+            event.setCancelled(true);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "portal reset " + player.getName());
+        } else if (item.getType() != Material.LAVA_BUCKET && item.getType() != Material.WATER_BUCKET
                 && item.getType() != Material.FLINT_AND_STEEL) {
             event.setCancelled(true);
             plugin.sendMessage(player, "&cYou cannot place blocks here.");
         } else {
+            if (block == null)
+                return;
+
             if (item.getType() == Material.WATER_BUCKET)
                 Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,
                         () -> {
