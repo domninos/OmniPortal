@@ -50,7 +50,10 @@ public class PlayerListener implements Listener {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             plugin.getPlayerHandler().tpToLastLocation(player);
             plugin.getPlayerHandler().removePlayer(player);
-        }, 25L);
+
+            if (plugin.getLavaPoolHandler().inLavaPool(player))
+                plugin.getLavaPoolHandler().removePlayer(player);
+        }, 40L);
     }
 
     @EventHandler
@@ -113,6 +116,9 @@ public class PlayerListener implements Listener {
 
         plugin.getPlayerHandler().tpToLastLocation(player);
         plugin.getPlayerHandler().removePlayer(player);
+
+        if (plugin.getLavaPoolHandler().inLavaPool(player))
+            plugin.getLavaPoolHandler().removePlayer(player);
     }
 
     @EventHandler
@@ -135,7 +141,8 @@ public class PlayerListener implements Listener {
                 plugin.getPlayerHandler().tpToLastLocation(player);
                 plugin.getPlayerHandler().removePlayer(player);
 
-                plugin.getLavaPoolHandler().removePlayer(player);
+                if (plugin.getLavaPoolHandler().inLavaPool(player))
+                    plugin.getLavaPoolHandler().removePlayer(player);
             }, 30L);
         }
     }

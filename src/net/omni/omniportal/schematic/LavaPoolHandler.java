@@ -123,6 +123,10 @@ public class LavaPoolHandler {
         return playerLavaPool.getOrDefault(player, null);
     }
 
+    public boolean inLavaPool(Player player) {
+        return playerLavaPool.containsKey(player);
+    }
+
     public LavaPool getAvailableLavaPool() {
         Optional<LavaPool> optional = lavaPools.stream().filter(lavaPool -> !lavaPool.isOccupied()).findFirst();
 

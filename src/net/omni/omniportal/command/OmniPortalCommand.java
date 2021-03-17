@@ -73,6 +73,11 @@ public class OmniPortalCommand implements CommandExecutor {
                 if (!sender.hasPermission("omniportal.leave"))
                     return noPerms(sender);
 
+                if (!plugin.getLavaPoolHandler().inLavaPool(player)) {
+                    plugin.sendMessage(sender, player.getName() + " is not in a lava pool.");
+                    return true;
+                }
+
                 Location lastLocation = plugin.getPlayerHandler().getLastLocation(player);
 
                 if (lastLocation == null) {
@@ -191,6 +196,11 @@ public class OmniPortalCommand implements CommandExecutor {
                     return true;
                 }
 
+                if (!plugin.getLavaPoolHandler().inLavaPool(target)) {
+                    plugin.sendMessage(sender, target.getName() + " is not in a lava pool.");
+                    return true;
+                }
+
                 Location lastLocation = plugin.getPlayerHandler().getLastLocation(target);
 
                 if (lastLocation == null) {
@@ -287,7 +297,8 @@ public class OmniPortalCommand implements CommandExecutor {
 
                 plugin.getTimerHandler().reset(target.getName());
 
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "portal leave " + target.getName());
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                        "portal leave " + target.getName());
 
                 plugin.sendMessage(sender, "&aSuccessfully reset " + target.getName() + "'s timer.");
                 plugin.sendMessage(target, "&aYour timer has been reset by " + sender.getName());
