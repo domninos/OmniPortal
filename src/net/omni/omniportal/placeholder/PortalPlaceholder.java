@@ -35,23 +35,18 @@ public class PortalPlaceholder extends PlaceholderExpansion {
             switch (params) {
                 case "top_1":
                     top = plugin.getTopHandler().getTop(1);
-                    System.out.println(top);
                     break;
                 case "top_2":
                     top = plugin.getTopHandler().getTop(2);
-                    System.out.println(top);
                     break;
                 case "top_3":
                     top = plugin.getTopHandler().getTop(3);
-                    System.out.println(top);
                     break;
                 case "top_4":
                     top = plugin.getTopHandler().getTop(4);
-                    System.out.println(top);
                     break;
                 case "top_5":
                     top = plugin.getTopHandler().getTop(5);
-                    System.out.println(top);
                     break;
             }
 

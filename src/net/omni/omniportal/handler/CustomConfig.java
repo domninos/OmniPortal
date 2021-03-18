@@ -10,7 +10,6 @@ import java.io.IOException;
 public class CustomConfig {
 
     private final File file;
-    private final OmniPortalPlugin plugin;
     private FileConfiguration config;
 
     public CustomConfig(OmniPortalPlugin plugin, String fileName) {
@@ -18,8 +17,6 @@ public class CustomConfig {
     }
 
     public CustomConfig(OmniPortalPlugin plugin, String fileName, File directory) {
-        this.plugin = plugin;
-
         if (!fileName.endsWith(".yml"))
             fileName += ".yml";
 
