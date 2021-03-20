@@ -141,7 +141,7 @@ public class LavaPoolHandler {
                     getRandomLocation(randomLocationOrigin, 1000);
 
             randomLocation.setY(plugin.getSchematicHandler().getSchematicWorld()
-                    .getHighestBlockYAt(randomLocation) + 2);
+                    .getHighestBlockYAt(randomLocation) + 30);
 
             int x = randomLocation.getBlockX();
             int y = randomLocation.getBlockY();

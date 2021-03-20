@@ -61,7 +61,7 @@ public class OmniPortalCommand implements CommandExecutor {
                 if (!sender.hasPermission("omniportal.join"))
                     return noPerms(sender);
 
-                if (plugin.getLavaPoolHandler().getLavaPoolFromPlayer(player) != null) {
+                if (plugin.getLavaPoolHandler().inLavaPool(player)) {
                     plugin.sendMessage(player,
                             "&cYou are already in a lava pool. Do /portal leave to leave.");
                     return true;
@@ -74,14 +74,14 @@ public class OmniPortalCommand implements CommandExecutor {
                     return noPerms(sender);
 
                 if (!plugin.getLavaPoolHandler().inLavaPool(player)) {
-                    plugin.sendMessage(sender, player.getName() + " is not in a lava pool.");
+                    plugin.sendMessage(sender, "&cYou are not in a lava pool.");
                     return true;
                 }
 
                 Location lastLocation = plugin.getPlayerHandler().getLastLocation(player);
 
                 if (lastLocation == null) {
-                    plugin.sendMessage(sender, player.getName() + "'s last location not found.");
+                    plugin.sendMessage(sender, "&cYour last location was not found.");
                     return true;
                 }
 
@@ -179,7 +179,7 @@ public class OmniPortalCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (plugin.getLavaPoolHandler().getLavaPoolFromPlayer(target) != null) {
+                if (plugin.getLavaPoolHandler().inLavaPool(target)) {
                     plugin.sendMessage(sender,
                             "&c" + target.getName() + " is already in a lava pool.");
                     return true;
@@ -197,14 +197,16 @@ public class OmniPortalCommand implements CommandExecutor {
                 }
 
                 if (!plugin.getLavaPoolHandler().inLavaPool(target)) {
-                    plugin.sendMessage(sender, target.getName() + " is not in a lava pool.");
+                    plugin.sendMessage(sender,
+                            "&c" + target.getName() + " is not in a lava pool.");
                     return true;
                 }
 
                 Location lastLocation = plugin.getPlayerHandler().getLastLocation(target);
 
                 if (lastLocation == null) {
-                    plugin.sendMessage(sender, target.getName() + "'s last location not found.");
+                    plugin.sendMessage(sender,
+                            "&c" + target.getName() + "'s last location not found.");
                     return true;
                 }
 
