@@ -111,6 +111,8 @@ public class SchematicHandler {
 
         this.worldName = worldName;
 
+        plugin.sendConsole("&bLoaded schematic world: " + worldName);
+
         return world;
     }
 

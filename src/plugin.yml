@@ -4,6 +4,7 @@ author: omni
 version: '1.0'
 softdepend:
   - PlaceholderAPI
+  - Multiverse-Core
 depend:
   - WorldEdit
 api-version: '1.16'
