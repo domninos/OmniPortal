@@ -7,15 +7,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class BreakableHandler {
-    private final Set<Material> breakable = new HashSet<>();
+public class PlaceableHandler {
+    private final Set<Material> placeable = new HashSet<>();
 
-    public BreakableHandler(OmniPortalPlugin plugin) {
-        List<String> types = plugin.getConfig().getStringList("breakable_block_types");
+    public PlaceableHandler(OmniPortalPlugin plugin) {
+        List<String> types = plugin.getConfig().getStringList("placeable_block_types");
 
         if (types.isEmpty()) {
-            plugin.sendConsole("&cCould not load breakable block types" +
-                    " because breakable_block_types is empty or null.");
+            plugin.sendConsole("&cCould not load placeable  block types" +
+                    " because placeable_block_types is empty or null.");
             return;
         }
 
@@ -32,15 +32,15 @@ public class BreakableHandler {
                 continue;
             }
 
-            breakable.add(material);
+            placeable.add(material);
         }
     }
 
-    public boolean isBreakable(Material material) {
-        return breakable.contains(material);
+    public boolean isPlaceable(Material material) {
+        return placeable.contains(material);
     }
 
     public void flush() {
-        breakable.clear();
+        placeable.clear();
     }
 }

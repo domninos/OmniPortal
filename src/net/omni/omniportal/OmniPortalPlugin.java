@@ -28,6 +28,7 @@ public class OmniPortalPlugin extends JavaPlugin {
     private PlayerHandler playerHandler;
     private ItemHandler itemHandler;
     private BreakableHandler breakableHandler;
+    private PlaceableHandler placeableHandler;
 
     @Override
     public void onEnable() {
@@ -43,6 +44,7 @@ public class OmniPortalPlugin extends JavaPlugin {
         this.topHandler = new TopHandler(this);
         this.itemHandler = new ItemHandler(this);
         this.breakableHandler = new BreakableHandler(this);
+        this.placeableHandler = new PlaceableHandler(this);
 
         // [+] LISTENERS [+]
         new PlayerListener(this).register();
@@ -68,6 +70,7 @@ public class OmniPortalPlugin extends JavaPlugin {
         playerHandler.flush();
         itemHandler.flush();
         breakableHandler.flush();
+        placeableHandler.flush();
 
         sendConsole("&aSuccessfully disabled OmniPortal");
     }
@@ -130,5 +133,9 @@ public class OmniPortalPlugin extends JavaPlugin {
 
     public BreakableHandler getBreakableHandler() {
         return breakableHandler;
+    }
+
+    public PlaceableHandler getPlaceableHandler() {
+        return placeableHandler;
     }
 }

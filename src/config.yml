@@ -21,3 +21,10 @@ portal_items:
 
 breakable_block_types:
   - 'OAK_LEAVES'
+
+placeable_block_types:
+  - 'OAK_LEAVES'
+  - 'LAVA_BUCKET'
+  - 'WATER_BUCKET'
+  - 'FLINT_AND_STEEL'
+  - 'BUCKET'

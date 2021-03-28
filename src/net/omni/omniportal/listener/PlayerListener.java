@@ -3,7 +3,6 @@ package net.omni.omniportal.listener;
 import net.omni.omniportal.OmniPortalPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -99,9 +98,7 @@ public class PlayerListener implements Listener {
         if (plugin.getItemHandler().isButton(item)) {
             event.setCancelled(true);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "portal reset " + player.getName());
-        } else if (item.getType() != Material.LAVA_BUCKET && item.getType() != Material.WATER_BUCKET
-                && item.getType() != Material.FLINT_AND_STEEL && item.getType() != Material.BUCKET) {
-
+        } else if (!plugin.getPlaceableHandler().isPlaceable(item.getType())) {
             if (player.getGameMode() == GameMode.CREATIVE)
                 return;
 
