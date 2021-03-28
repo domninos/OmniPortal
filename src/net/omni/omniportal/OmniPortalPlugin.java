@@ -1,10 +1,7 @@
 package net.omni.omniportal;
 
 import net.omni.omniportal.command.OmniPortalCommand;
-import net.omni.omniportal.handler.ItemHandler;
-import net.omni.omniportal.handler.PlayerHandler;
-import net.omni.omniportal.handler.TimerHandler;
-import net.omni.omniportal.handler.TopHandler;
+import net.omni.omniportal.handler.*;
 import net.omni.omniportal.listener.PlayerListener;
 import net.omni.omniportal.placeholder.PortalPlaceholder;
 import net.omni.omniportal.schematic.LavaPoolHandler;
@@ -30,13 +27,13 @@ public class OmniPortalPlugin extends JavaPlugin {
     private LavaPoolHandler lavaPoolHandler;
     private PlayerHandler playerHandler;
     private ItemHandler itemHandler;
+    private BreakableHandler breakableHandler;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
 
         this.schematicHandler = new SchematicHandler(this);
-
         this.lavaPoolHandler = new LavaPoolHandler(this);
 
         lavaPoolHandler.loadLavaPools();
@@ -45,6 +42,7 @@ public class OmniPortalPlugin extends JavaPlugin {
         this.timerHandler = new TimerHandler(this);
         this.topHandler = new TopHandler(this);
         this.itemHandler = new ItemHandler(this);
+        this.breakableHandler = new BreakableHandler(this);
 
         // [+] LISTENERS [+]
         new PlayerListener(this).register();
@@ -68,6 +66,8 @@ public class OmniPortalPlugin extends JavaPlugin {
         timerHandler.flush();
         lavaPoolHandler.flush();
         playerHandler.flush();
+        itemHandler.flush();
+        breakableHandler.flush();
 
         sendConsole("&aSuccessfully disabled OmniPortal");
     }
@@ -126,5 +126,9 @@ public class OmniPortalPlugin extends JavaPlugin {
 
     public ItemHandler getItemHandler() {
         return itemHandler;
+    }
+
+    public BreakableHandler getBreakableHandler() {
+        return breakableHandler;
     }
 }

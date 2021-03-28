@@ -10,3 +10,14 @@ commandsToExecuteOnReset:
 
 mainWorld: world
 schematicWorld: flatworld
+
+# Button is automatically added in the 9th slot
+# Format: MATERIAL:AMOUNT
+portal_items:
+  - 'BUCKET:1'
+  - 'WATER_BUCKET:1'
+  - 'FLINT_AND_STEEL:1'
+  - 'OAK_LEAVES:32'
+
+breakable_block_types:
+  - 'OAK_LEAVES'

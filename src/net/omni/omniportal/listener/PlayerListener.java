@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -63,6 +64,11 @@ public class PlayerListener implements Listener {
             return;
 
         if (!plugin.getTimerHandler().hasTimer(player.getName()))
+            return;
+
+        Block block = event.getBlock();
+
+        if (plugin.getBreakableHandler().isBreakable(block.getType()))
             return;
 
         if (player.getGameMode() == GameMode.CREATIVE)
